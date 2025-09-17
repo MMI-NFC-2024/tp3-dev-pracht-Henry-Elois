@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="p-4">
+    <h1>Navigation entre les espèces (iframe)</h1>
+
+    <select id="species-iframe" class="select select-bordered mb-4">
+      <option value="/species-iframe/Adelie">Adelie</option>
+      <option value="/species-iframe/Gentoo">Gentoo</option>
+      <option value="/species-iframe/Chinstrap">Chinstrap</option>
+    </select>
+
+    <iframe
+      src="/species-iframe/Adelie"
+      name="speciesFrame"
+      id="speciesFrame"
+      width="100%"
+      class="min-h-[800px] border-2 border-gray-300 rounded-lg"
+      frameborder="0"
+    >
+    </iframe>
+
+    <script>
+      document.querySelector("#species-iframe")?.addEventListener("change", (evt) => {
+        const value = (evt.target as HTMLSelectElement).value;
+        document.querySelector("#speciesFrame")?.setAttribute("src", value);
+      });
+    </script>
+  </div>
+</Layout>

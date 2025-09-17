@@ -1,0 +1,12 @@
+---
+import penguins from "../../assets/penguins.json";
+import Layout from "../../layouts/Layout.astro";
+import GraphicSpecies from "../../components/GraphicSpecies.astro";
+
+const penguinsGentoo = penguins.filter(({ species }) => species === "Gentoo");
+---
+
+<Layout>
+  <h1 class="text-2xl mb-3">Les penguins Gentoo</h1>
+  <GraphicSpecies species="Gentoo" />
+</Layout>

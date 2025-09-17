@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <title>Mon projet Penguins</title>
+  </head>
+  <body class="bg-gray-100">
+    <nav class="bg-gray-800 p-4 flex justify-between items-center">
+      <ul class="flex space-x-6">
+        <li>
+          <a
+            href="/"
+            class="text-white font-semibold hover:text-yellow-400 transition-colors"
+          >
+            Accueil
+          </a>
+        </li>
+        <li>
+          <a
+            href="/test-iframe"
+            class="text-white font-semibold hover:text-yellow-400 transition-colors"
+          >
+            Classement par espèce
+          </a>
+        </li>
+        <li>
+          <a
+            href="/species-all"
+            class="text-white font-semibold hover:text-yellow-400 transition-colors"
+          >
+            Slider
+          </a>
+        </li>
+      </ul>
+      <div>
+        <label for="species" class="sr-only">Choisir une espèce</label>
+        <select
+          id="species"
+          class="bg-gray-700 text-white font-medium px-3 py-2 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        >
+          <option value="Adelie">Adelie</option>
+          <option value="Chinstrap">Chinstrap</option>
+          <option value="Gentoo">Gentoo</option>
+        </select>
+      </div>
+    </nav>
+    <script>
+      document.querySelector("#species")?.addEventListener("change", (evt) => {
+        const value = (evt.target as HTMLSelectElement).value;
+        location.pathname = "/species/" + value;
+      });
+    </script>
+    <main class="p-6">
+      <slot />
+    </main>
+  </body>
+</html>

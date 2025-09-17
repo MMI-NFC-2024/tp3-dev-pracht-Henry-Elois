@@ -1,0 +1,26 @@
+---
+import PlotFigure from "../../components/PlotFigure.astro";
+import * as Plot from "@observablehq/plot";
+import penguins from "../../assets/penguins.json";
+
+const penguinsGentoo = penguins.filter(({ species }) => species === "Gentoo");
+---
+
+<div>
+  <h1>Les penguins Gentoo</h1>
+  <PlotFigure
+    options={{
+      grid: true,
+      color: { legend: true },
+      marks: [
+        Plot.dot(penguinsGentoo, {
+          x: "culmen_length_mm",
+          y: "culmen_depth_mm",
+          stroke: "species",
+          fill: "species",
+          title: (d) => `${d.species}\n${d.island}`,
+        }),
+      ],
+    }}
+  />
+</div>
