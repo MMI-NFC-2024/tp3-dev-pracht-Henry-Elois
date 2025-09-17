@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GraphicSpecies from "../components/GraphicSpecies.astro";
+import {
+  Tabs,
+  TabsList,
+  TabsTab,
+  TabsPanel,
+} from "accessible-astro-components";
+import penguins from "../assets/penguins.json";
+
+const penguinsAdelie = penguins.filter((p) => p.species === "Adelie");
+const penguinsGentoo = penguins.filter((p) => p.species === "Gentoo");
+const penguinsChinstrap = penguins.filter((p) => p.species === "Chinstrap");
+---
+
+<Layout>
+  <div class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Navigation entre les espèces</h1>
+
+    <Tabs>
+      <TabsList>
+        <TabsTab id="adelie-tab" controls="adelie-panel" selected
+          >Adelie</TabsTab
+        >
+        <TabsTab id="gentoo-tab" controls="gentoo-panel">Gentoo</TabsTab>
+        <TabsTab id="chinstrap-tab" controls="chinstrap-panel"
+          >Chinstrap</TabsTab
+        >
+      </TabsList>
+
+      <TabsPanel id="adelie-panel" labelledby="adelie-tab" selected>
+        <h2 class="text-xl font-semibold mb-2">Les penguins Adelie</h2>
+        <GraphicSpecies species="Adelie" />
+      </TabsPanel>
+
+      <TabsPanel id="gentoo-panel" labelledby="gentoo-tab">
+        <h2 class="text-xl font-semibold mb-2">Gentoo</h2>
+        <GraphicSpecies species="Gentoo" />
+      </TabsPanel>
+
+      <TabsPanel id="chinstrap-panel" labelledby="chinstrap-tab">
+        <h2 class="text-xl font-semibold mb-2">Chinstrap</h2>
+        <GraphicSpecies species="Chinstrap" />
+      </TabsPanel>
+    </Tabs>
+  </div>
+</Layout>
+
+
+
+
