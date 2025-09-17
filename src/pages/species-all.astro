@@ -1,9 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PlotFigure from "../components/PlotFigure.astro";
-import * as Plot from "@observablehq/plot";
-import penguins from "../assets/penguins.json";
 import GraphicSpecies from "../components/GraphicSpecies.astro";
+import penguins from "../assets/penguins.json";
 
 const penguinsAdelie = penguins.filter((p) => p.species === "Adelie");
 const penguinsGentoo = penguins.filter((p) => p.species === "Gentoo");
@@ -14,21 +12,17 @@ const penguinsChinstrap = penguins.filter((p) => p.species === "Chinstrap");
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">Navigation entre les espèces</h1>
 
-    <nav class="mb-6">
-      <ul class="flex space-x-6">
-        <li>
-          <a href="#adelie" class="text-blue-600 hover:underline">Adelie</a>
-        </li>
-        <li>
-          <a href="#gentoo" class="text-blue-600 hover:underline">Gentoo</a>
-        </li>
-        <li>
-          <a href="#chinstrap" class="text-blue-600 hover:underline"
-            >Chinstrap</a
-          >
-        </li>
-      </ul>
-    </nav>
+    <div class="mb-6">
+      <label for="species-slider" class="sr-only">Choisir une espèce</label>
+      <select
+        id="species-slider"
+        class="bg-gray-200 px-3 py-2 rounded-md border border-gray-400"
+      >
+        <option value="adelie">Adelie</option>
+        <option value="gentoo">Gentoo</option>
+        <option value="chinstrap">Chinstrap</option>
+      </select>
+    </div>
 
     <div class="slider-container">
       <section id="adelie" class="slide">
@@ -47,6 +41,19 @@ const penguinsChinstrap = penguins.filter((p) => p.species === "Chinstrap");
       </section>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const select = document.getElementById("species-slider");
+      if (select) {
+        select.addEventListener("change", (evt) => {
+          const value = evt.target.value;
+          location.hash = value;
+        });
+      }
+    });
+  </script>
+
 </Layout>
 
 <style>
